@@ -1,4 +1,5 @@
 const express = require("express");
+const { v4: uuidv4 } = require("uuid");
 
 const models = require("../models");
 const config = require("../../config");
@@ -42,6 +43,7 @@ router.post("/:id/add", async (req, res) => {
   const video_id = new URL(req.body.video_url).searchParams.get("v");
   const data = await yt.fetch_video_info(video_id)
   const video = await models.Video.create({
+    id: uuidv4(),
     video_id: video_id,
     video_title: data.items[0].snippet.title,
     video_description: data.items[0].snippet.description.substring(0, 200),

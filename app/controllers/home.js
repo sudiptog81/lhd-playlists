@@ -1,4 +1,5 @@
 const express = require("express");
+const { v4: uuidv4 } = require("uuid");
 
 const models = require("../models");
 
@@ -24,6 +25,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const playlist = await models.Playlist.create({
+    id: uuidv4(),
     playlist_title: req.body.playlist_title
   });
   const user = await models.User.findOne({ where: { username: req.session.user.username }});
