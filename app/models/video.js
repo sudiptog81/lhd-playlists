@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: uuidv4(),
         primaryKey: true
       },
-      video_id: { type: DataTypes.STRING, unique: true, allowNull: false },
+      video_id: { type: DataTypes.STRING, allowNull: false },
       video_title: DataTypes.STRING,
       video_description: DataTypes.STRING,
       channel_title: DataTypes.STRING,
