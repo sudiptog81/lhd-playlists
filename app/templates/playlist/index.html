@@ -7,7 +7,8 @@
     {{#if isAuthorized}}
       <form action="/playlist/{{ playlist_id }}/add" method="post"
         class="form-inline align-items-center justify-content-center" role="form">
-        <input class="form-control mr-2" type="url" name="video_url" id="video_url" placeholder="video url" />
+        <input class="form-control mr-2" type="url" name="video_url" id="video_url"
+          placeholder="e.g. https://www.youtube.com/watch?v=wKbdbwJRj6g" />
         <button class="btn btn-outline-light" type="submit">Add Video</button>
       </form>
     {{/if}}
