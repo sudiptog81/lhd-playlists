@@ -35,7 +35,6 @@ router.post("/:id/add", async (req, res) => {
   const playlist = await models.Playlist.findOne({ where: { id: req.params.id } });
   const isAuthorized = req.session ? req.session.user.id == await playlist.getUser().id : false;
   if (!isAuthorized) {
-    req.flash('error', 'Not authorized');
     return res.redirect("/playlist/" + req.params.id);
   };
   const yt = new YouTube(config.youtubeApiKey);
@@ -77,7 +76,6 @@ router.post("/:id/video/delete/:video_id", async (req, res) => {
   const playlist = await models.Playlist.findOne({ where: { id: req.params.id } });
   const isAuthorized = req.session ? req.session.user : false;
   if (!isAuthorized) {
-    req.flash('error', 'Not authorized');
     return res.redirect("/playlist/" + req.params.id);
   };
   const video = await models.Video.findOne({ where: { id: req.params.video_id } });
