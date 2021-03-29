@@ -33,7 +33,8 @@ router.get("/:id", async (req, res) => {
 
 router.post("/:id/add", async (req, res) => {
   const playlist = await models.Playlist.findOne({ where: { id: req.params.id } });
-  const isAuthorized = req.session ? req.session.user.id == await playlist.getUser().id : false;
+  const creator = await playlist.getUser();
+  const isAuthorized = req.session.user ? req.session.user.id == creator.id : false;
   if (!isAuthorized) {
     return res.redirect("/playlist/" + req.params.id);
   };
@@ -74,7 +75,8 @@ router.get("/:id/video/:video_id", async (req, res) => {
 
 router.post("/:id/video/delete/:video_id", async (req, res) => {
   const playlist = await models.Playlist.findOne({ where: { id: req.params.id } });
-  const isAuthorized = req.session ? req.session.user : false;
+  const creator = await playlist.getUser();
+  const isAuthorized = req.session.user ? req.session.user.id == creator.id : false;
   if (!isAuthorized) {
     return res.redirect("/playlist/" + req.params.id);
   };
