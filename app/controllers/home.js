@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
     id: uuidv4(),
     playlist_title: req.body.playlist_title
   });
-  const user = await models.User.findOne({ where: { username: req.session.user.username }});
+  const user = await models.User.findOne({ where: { id: req.session.user.id }});
   await user.addPlaylist(playlist);
   res.redirect("/playlist/" + playlist.id)
 });
